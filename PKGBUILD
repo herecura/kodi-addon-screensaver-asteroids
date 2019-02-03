@@ -4,7 +4,7 @@ pkgname=kodi-addon-screensaver-asteroids
 epoch=1
 pkgver=2.2.0
 _codename=Leia
-pkgrel=1
+pkgrel=2
 pkgdesc="Asteroids screensaver for Kodi"
 arch=('x86_64')
 url='https://github.com/xbmc/screensaver.asteroids'
@@ -17,16 +17,17 @@ sha512sums=('12ae16d4c2e89e4407daa5512b67a9589b0bdd06141b2538f1dac47bfd3cdfe8313
 
 build() {
     cd "screensaver.asteroids-$pkgver-$_codename"
-	cmake \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DBUILD_SHARED_LIBS=1 \
-		-DUSE_LTO=1
-	make
+    cmake \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=1 \
+        -DUSE_LTO=1 \
+        .
+    make
 }
 
 package() {
     cd "screensaver.asteroids-$pkgver-$_codename"
-	make DESTDIR="$pkgdir/" install
+    make DESTDIR="$pkgdir/" install
 }
 
